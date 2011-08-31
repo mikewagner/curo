@@ -2,15 +2,14 @@ module RSSH
   module Action
     class Add
 
-      def initialize options = {}
-        @options = {}
+      def initialize
       end
 
       def invoke options = {}
         @options = options
-        p @options
+        entry   = RSSH::Action::Entry.new options
+        entry.save
       end
-
 
     end
   end

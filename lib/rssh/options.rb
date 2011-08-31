@@ -27,6 +27,7 @@ module RSSH
       rescue OptionParser::InvalidOption => e
         puts e.message
         puts @parser
+        exit 1
       end
     end
 

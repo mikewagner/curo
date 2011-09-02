@@ -7,7 +7,7 @@ Command line utility for tracking and tagging ssh hosts.
 
 * Add host with optional tag
 
-  rssh add 127.0.0.1 --tag Home
+    rssh add 127.0.0.1 --tag Home
 
 * List hosts
 

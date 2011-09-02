@@ -5,19 +5,19 @@ Command line utility for tracking and tagging ssh hosts.
 
 == Examples
 
- * Add host with optional tag
+* Add host with optional tag
 
   rssh add 127.0.0.1 --tag Home
 
-  * List hosts
+* List hosts
 
   rssh list
 
-  * Connect to a host by host name
+* Connect to a host by host name
 
   rssh 127.0.0.1
 
-  * Connnect to a host by tag
+* Connnect to a host by tag
 
   rssh Home
 

@@ -32,11 +32,18 @@ module RSSH
       tags.include? tag    
     end
 
+    def has_host? host
+      hosts.include? host
+    end
+
+    def hosts
+      @hosts ||= entries.collect(&:host).compact.uniq
+    end
+
     def tags
       @tags ||= entries.collect(&:tag).compact.uniq
     end
-
-
+    
     def load!
       FileUtils.touch @path unless File.exist? @path
       contents = YAML.load( File.read( @path ) ) || []

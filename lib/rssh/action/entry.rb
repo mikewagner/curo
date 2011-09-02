@@ -4,25 +4,23 @@ module RSSH
   module Action
     class Entry
 
-      attr_accessor :entry, :tag
+      attr_accessor :host, :tag
 
       def initialize attrs = {}
         self.attributes = attrs
       end
 
       def connect
-        puts "Connecting to #{self.entry} at #{Time.now}"
-        exec "ssh #{self.entry}"
-      end
-
-      def save
-       RSSH.config << self
-       RSSH.config.save
-       puts "Saved #{self.entry} #{'with tag ' + self.tag if self.tag}"
+        puts "Connecting to #{self.host} at #{Time.now}"
+        exec "ssh #{self.host}"
       end
 
       def attributes
-        { :entry => entry, :tag => tag }
+        { :host => host, :tag => tag }
+      end
+
+      def entry=(host)
+        @host = host
       end
 
       private

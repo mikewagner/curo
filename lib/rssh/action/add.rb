@@ -3,7 +3,6 @@ module RSSH
     class Add
 
       def invoke options = {}
-        @options = options
         begin
           entry   = RSSH::Action::Entry.new options
   

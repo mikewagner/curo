@@ -19,6 +19,11 @@ module RSSH
         { :host => host, :tag => tag }
       end
 
+      def to_s
+        length = self.tag ? self.tag.length : 0
+        printf("%*s %s", length, "[#{self.tag}]", self.host) 
+      end
+
       def entry=(host)
         @host = host
       end

@@ -1,4 +1,5 @@
 require 'yaml'
+require 'fileutils'
 
 module RSSH
   class Configuration
@@ -37,6 +38,7 @@ module RSSH
 
 
     def load!
+      FileUtils.touch @path unless File.exist? @path
       contents = YAML.load( File.read( @path ) ) || []
       contents.each do |entry|
         entries << RSSH::Action::Entry.new( entry )
@@ -47,7 +49,10 @@ module RSSH
       File.open( @path, 'w' ) do |file|
         file.write YAML.dump entries.collect { |e| e.attributes }
       end
-    end
+   end
+
+  
+
 
   end
 end

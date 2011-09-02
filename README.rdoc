@@ -11,15 +11,15 @@ Command line utility for tracking and tagging ssh hosts.
 
 * List hosts
 
-  rssh list
+    rssh list
 
 * Connect to a host by host name
 
-  rssh 127.0.0.1
+    rssh 127.0.0.1
 
 * Connnect to a host by tag
 
-  rssh Home
+    rssh Home
 
 
 == Contributing to rssh

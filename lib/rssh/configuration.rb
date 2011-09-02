@@ -4,6 +4,8 @@ require 'fileutils'
 module RSSH
   class Configuration
 
+    attr_accessor :path
+
     DEFAULT = File.expand_path('~/.rssh_config')
 
     class << self

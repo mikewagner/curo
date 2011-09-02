@@ -15,7 +15,6 @@ module RSSH
       end
     end
 
-
     def initialize path = nil
       @path = path || DEFAULT
     end
@@ -57,9 +56,6 @@ module RSSH
         file.write YAML.dump entries.collect { |e| e.attributes }
       end
    end
-
-  
-
 
   end
 end

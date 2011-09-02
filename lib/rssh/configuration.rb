@@ -44,7 +44,11 @@ module RSSH
     def tags
       @tags ||= entries.collect(&:tag).compact.uniq
     end
-    
+ 
+    def find arg
+      entries.detect { |e| e.host == arg || e.tag == arg } 
+    end
+  
     def load!
       FileUtils.touch @path unless File.exist? @path
       contents = YAML.load( File.read( @path ) ) || []

@@ -20,8 +20,9 @@ module RSSH
       end
 
       def to_s
-        length = self.tag ? self.tag.length : 0
-        printf("%*s %s", length, "[#{self.tag}]", self.host) 
+        string  = "#{self.host}"
+        string += " (#{self.tag})" unless self.tag.empty? || self.tag.nil?
+        string
       end
 
       def entry=(host)

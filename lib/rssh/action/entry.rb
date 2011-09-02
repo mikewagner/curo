@@ -1,3 +1,5 @@
+require 'yaml'
+
 module RSSH
   module Action
     class Entry
@@ -8,16 +10,20 @@ module RSSH
         self.attributes = attrs
       end
 
-
       def connect
         puts "Connecting to #{self.entry} at #{Time.now}"
         exec "ssh #{self.entry}"
       end
 
       def save
-        puts "Saved #{self.entry} #{'with tag ' + self.tag if self.tag}"
+       RSSH.config << self
+       RSSH.config.save
+       puts "Saved #{self.entry} #{'with tag ' + self.tag if self.tag}"
       end
 
+      def attributes
+        { :entry => entry, :tag => tag }
+      end
 
       private
 

@@ -22,6 +22,12 @@ Command line utility for tracking and tagging ssh hosts.
     rssh Home
 
 
+== TODOs
+
+* Add function to remove entries
+* Add support for arguments to SSH command
+* Add option for specifying username, i.e.  <username>@somedomain.com
+
 == Contributing to rssh
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet

@@ -13,8 +13,11 @@ module RSSH
       end
 
       def connect
-        puts "Connecting to #{self.host} at #{Time.now}"
-        exec "ssh #{self.host}"
+        puts connect_message
+        command  = "ssh "
+        command += self.user + '@' unless self.user.nil? || self.user.empty?
+        command += self.host
+        exec command
       end
 
       def attributes
@@ -35,7 +38,15 @@ module RSSH
         @host = host
       end
 
+      def connecting_as
+        (self.user.nil? || self.user.empty?) ? ENV['USER'] : self.user
+      end
+
       private
+
+      def connect_message
+        ["Connecting to", self.host, "as", self.connecting_as, "at", Time.now].join(' ')
+      end
 
       def attributes=(attributes)
         return if attributes.empty?

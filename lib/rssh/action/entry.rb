@@ -18,12 +18,16 @@ module RSSH
       end
 
       def attributes
-        { :host => host, :tag => tag }
+        Hash.new.tap do |attr|
+          ATTRIBUTES.each do |key|
+            attr[key.to_sym] = instance_variable_get(:"@#{key}")
+          end 
+        end
       end
 
       def to_s
         string  = "#{self.host}"
-        string += " (#{self.tag})" unless self.tag.empty? || self.tag.nil?
+        string += " (#{self.tag})" unless self.tag.nil? || self.tag.empty?
         string
       end
 

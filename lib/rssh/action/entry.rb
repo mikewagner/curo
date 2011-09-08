@@ -2,32 +2,33 @@ module RSSH
   module Action
     class Entry
 
-      ATTRIBUTES = %w(host tag user)
-      attr_accessor *ATTRIBUTES
+      attr_accessor :host, :tag, :user
 
       def initialize attrs = {}, &block
         self.attributes = attrs
         yield(self) if block_given?
       end
 
-      def connect
+      def connect 
         puts connect_message
         command  = ["ssh ", [self.connecting_as, self.host].join('@')].join(' ')
         exec command
       end
 
       def attributes
-        Hash.new.tap do |attr|
-          ATTRIBUTES.each do |key|
-            attr[key.to_sym] = instance_variable_get(:"@#{key}")
-          end 
-        end
+        attrs = {}
+        attrs[:host] = self.host
+        attrs[:tag]  = self.tag  if self.has_tag?
+        attrs[:user] = self.user if self.has_user?
+        attrs
       end
 
       def to_s
-        string  = "#{self.host}"
-        string += " (#{self.tag})" if self.has_tag?
-        string
+        string = []
+        string << self.host
+        string << "<#{self.user}>" if self.has_user?
+        string << "(#{self.tag})"  if self.has_tag?
+        string.join(' ')
       end
 
       def entry=(host)
@@ -35,11 +36,16 @@ module RSSH
       end
 
       def connecting_as
-        (self.user.nil? || self.user.empty?) ? ENV['USER'] : self.user
+        self.has_user? ? self.user : ENV['USER']
       end
 
       def has_tag?
         return false if self.tag.nil? || self.tag.empty?
+        true
+      end
+
+      def has_user?
+        return false if self.user.nil? || self.user.empty?
         true
       end
 

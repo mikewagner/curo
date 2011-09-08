@@ -28,7 +28,7 @@ module RSSH
 
       def to_s
         string  = "#{self.host}"
-        string += " (#{self.tag})" unless self.tag.nil? || self.tag.empty?
+        string += " (#{self.tag})" if self.has_tag?
         string
       end
 
@@ -38,6 +38,11 @@ module RSSH
 
       def connecting_as
         (self.user.nil? || self.user.empty?) ? ENV['USER'] : self.user
+      end
+
+      def has_tag?
+        return false if self.tag.nil? || self.tag.empty?
+        true
       end
 
       private

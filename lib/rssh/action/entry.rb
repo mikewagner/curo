@@ -1,5 +1,3 @@
-require 'yaml'
-
 module RSSH
   module Action
     class Entry

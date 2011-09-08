@@ -13,6 +13,10 @@ module RSSH
           self[:tag] = tag
         end
 
+        opts.on('-u', '--user [USER]', String, 'Specify a user to connect to host as') do |user|
+          self[:user] = user
+        end
+
         opts.on_tail('-h', '--help', 'Display help' ) do
           puts parser
           exit 

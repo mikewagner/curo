@@ -4,10 +4,12 @@ module RSSH
   module Action
     class Entry
 
-      attr_accessor :host, :tag
+      ATTRIBUTES = %w(host tag user)
+      attr_accessor *ATTRIBUTES
 
-      def initialize attrs = {}
+      def initialize attrs = {}, &block
         self.attributes = attrs
+        yield(self) if block_given?
       end
 
       def connect

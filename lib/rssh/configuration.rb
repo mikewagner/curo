@@ -28,6 +28,15 @@ module RSSH
     def << entry
       entries << entry
     end
+    alias :add :<<
+
+    def remove name
+      entry = find name
+      if entry
+        entries.delete entry
+      end
+    end
+  
 
     def has_tag? tag
       tags.include? tag    

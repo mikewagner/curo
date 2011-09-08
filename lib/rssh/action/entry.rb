@@ -14,9 +14,7 @@ module RSSH
 
       def connect
         puts connect_message
-        command  = "ssh "
-        command += self.user + '@' unless self.user.nil? || self.user.empty?
-        command += self.host
+        command  = ["ssh ", [self.connecting_as, self.host].join('@')].join(' ')
         exec command
       end
 

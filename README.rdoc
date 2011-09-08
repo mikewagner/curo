@@ -24,7 +24,6 @@ Command line utility for tracking and tagging ssh hosts.
 
 == TODOs
 
-* Add function to remove entries
 * Add support for arguments to SSH command
 * Add option for specifying username, i.e.  <username>@somedomain.com
 

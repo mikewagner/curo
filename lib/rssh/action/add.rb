@@ -14,7 +14,6 @@ module RSSH
           puts "Saved #{entry.host} #{'with tag ' + entry.tag if entry.tag}"
         rescue Exception => e
           puts e.message
-          exit
         end
       end
 

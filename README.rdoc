@@ -25,7 +25,7 @@ Command line utility for tracking and tagging ssh hosts.
 == TODOs
 
 * Add support for arguments to SSH command
-* Add option for specifying username, i.e.  <username>@somedomain.com
+* Add ability to override user when connecting
 
 == Contributing to rssh
  

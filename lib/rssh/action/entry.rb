@@ -9,7 +9,6 @@ module RSSH
         yield(self) if block_given?
       end
 
-
       def attributes
         attrs = {}
         attrs[:host] = self.host
@@ -30,7 +29,6 @@ module RSSH
         @host = host
       end
 
-
       def has_tag?
         return false if self.tag.nil? || self.tag.empty?
         true
@@ -42,7 +40,6 @@ module RSSH
       end
 
       private
-
 
       def attributes=(attributes)
         return if attributes.empty?

@@ -15,7 +15,6 @@ module RSSH
         end
       end
 
-
     end
   end
 end

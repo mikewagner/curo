@@ -34,7 +34,6 @@ module RSSH
       end
     end
 
-
     private
 
     def find_entry action

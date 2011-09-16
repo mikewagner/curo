@@ -11,7 +11,10 @@ module RSSH
 
           RSSH.config << entry
           RSSH.config.save
-          puts "Saved #{entry.host} #{'with tag ' + entry.tag if entry.tag}"
+
+          msg  = "Saved '#{entry.host}'"
+          msg += " with tag " + "'#{entry.tag}'" if entry.has_tag?
+          puts msg
         rescue Exception => e
           puts e.message
         end

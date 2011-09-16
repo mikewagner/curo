@@ -21,11 +21,13 @@ Command line utility for tracking and tagging ssh hosts.
 
     rssh Home
 
+* Connect to a host and override the user
+
+    rssh Home -u root
 
 == TODOs
 
 * Add support for arguments to SSH command
-* Add ability to override user when connecting
 
 == Contributing to rssh
  

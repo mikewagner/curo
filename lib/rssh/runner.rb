@@ -22,7 +22,9 @@ module RSSH
         raise "No action was specified" if options[:action].nil?
 
         entry = find_entry options[:action]
-        return entry.connect if entry
+        if entry
+          RSSH::Action::Connection.new( entry, options ).connect
+        end
 
         action = find_action options.delete(:action)
         action.invoke options

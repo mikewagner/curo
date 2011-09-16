@@ -9,11 +9,6 @@ module RSSH
         yield(self) if block_given?
       end
 
-      def connect 
-        puts connect_message
-        command  = ["ssh ", [self.connecting_as, self.host].join('@')].join(' ')
-        exec command
-      end
 
       def attributes
         attrs = {}
@@ -35,9 +30,6 @@ module RSSH
         @host = host
       end
 
-      def connecting_as
-        self.has_user? ? self.user : ENV['USER']
-      end
 
       def has_tag?
         return false if self.tag.nil? || self.tag.empty?
@@ -51,9 +43,6 @@ module RSSH
 
       private
 
-      def connect_message
-        ["Connecting to", self.host, "as", self.connecting_as, "at", Time.now].join(' ')
-      end
 
       def attributes=(attributes)
         return if attributes.empty?

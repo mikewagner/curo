@@ -15,7 +15,7 @@ describe RSSH::Configuration do
     context "with no path parameter" do
       it "sets default path" do
         config = RSSH::Configuration.new 
-        config.path.should == RSSH::Configuration::DEFAULT
+        config.path.should == RSSH::Configuration.default_config
       end
     end
 

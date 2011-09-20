@@ -1,15 +1,9 @@
 module RSSH
 
   autoload :Configuration, 'rssh/configuration'
-  autoload :Runner,        'rssh/runner'
+  autoload :Connnection,   'rssh/connection'
+  autoload :Entry,         'rssh/entry'
   autoload :Options,       'rssh/options'
-  autoload :Action,        'rssh/action'
-
-  extend self
-
-  def config
-    @@config ||= RSSH::Configuration.load
-  end
-
+  autoload :Runner,        'rssh/runner'
 
 end

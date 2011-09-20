@@ -3,15 +3,6 @@ module RSSH
 
     attr_accessor :options
 
-    class << self
-
-      def run args
-        runner = new args
-        runner.run
-      end
-  
-    end
-
     def initialize args
       @args    = args
       @options = RSSH::Options.new @args
@@ -21,33 +12,53 @@ module RSSH
       begin
         raise "No action was specified" if options[:action].nil?
 
-        entry = find_entry options[:action]
-        if entry
-          RSSH::Action::Connection.new( entry, options ).connect
-        end
+        @config = RSSH::Configuration.load
+        action = @options.delete(:action)
 
-        action = find_action options.delete(:action)
-        action.invoke options
+        entry = @config.find action
+        if entry
+          RSSH::Connection.new( entry, options ).connect
+        else
+          if respond_to?(:"#{action}") 
+            send(:"#{action}") 
+          else
+            raise('Error', "unknown attribute: #{k}")
+          end
+        end
       rescue Exception => e
         puts e.message
         exit
       end
     end
 
-    private
+    def add 
+      entry = RSSH::Entry.new @options
 
-    def find_entry action
-      RSSH.config.find action
+      raise "Tag already exists for '#{entry.tag}'"    if @config.has_tag?  entry.tag
+      raise "Entry already exists for '#{entry.host}'" if @config.has_host? entry.host
+
+      @config << entry
+      @config.save
+
+      msg  = "Saved '#{entry.host}'"
+      msg += " with tag " + "'#{entry.tag}'" if entry.has_tag?
+      puts msg
     end
 
-    def find_action action
-      begin
-        action_name = action.capitalize
-        RSSH::Action.const_get(action_name).new
-      rescue
-        raise "Sorry, unable to determine action for '#{action}'"
+
+    def remove 
+      entry_name_or_tag = options[:entry]
+      @config.remove entry_name_or_tag 
+      puts "Removed entry for '#{entry_name_or_tag}'"
+    end
+
+
+    def list
+      entries = @config.entries
+      entries.each do |entry|
+        puts entry.to_s
       end
     end
-   
+
   end
 end

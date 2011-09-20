@@ -6,7 +6,7 @@ module RSSH
 
     attr_accessor :path
 
-    DEFAULT = File.expand_path('~/.rssh_config')
+    @@default_config = File.expand_path('~/.rssh_config')
 
     class << self
 
@@ -15,10 +15,15 @@ module RSSH
         config.load!
         config
       end
+
+      def default_config
+        @@default_config
+      end
+
     end
 
     def initialize path = nil
-      @path = path || DEFAULT
+      @path = path || @@default_config
     end
 
     def entries
@@ -35,8 +40,8 @@ module RSSH
       if entry
         entries.delete entry
       end
+      save
     end
-  
 
     def has_tag? tag
       tags.include? tag    
@@ -62,7 +67,7 @@ module RSSH
       FileUtils.touch @path unless File.exist? @path
       contents = YAML.load( File.read( @path ) ) || []
       contents.each do |entry|
-        entries << RSSH::Action::Entry.new( entry )
+        entries << RSSH::Entry.new( entry )
       end
     end
 

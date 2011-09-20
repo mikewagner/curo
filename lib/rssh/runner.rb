@@ -13,7 +13,7 @@ module RSSH
         raise "No action was specified" if options[:action].nil?
 
         @config = RSSH::Configuration.load
-        action = @options.delete(:action)
+        action  = options.delete(:action)
 
         entry = @config.find action
         if entry
@@ -32,7 +32,7 @@ module RSSH
     end
 
     def add 
-      entry = RSSH::Entry.new @options
+      entry = RSSH::Entry.new options
 
       raise "Tag already exists for '#{entry.tag}'"    if @config.has_tag?  entry.tag
       raise "Entry already exists for '#{entry.host}'" if @config.has_host? entry.host

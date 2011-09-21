@@ -52,11 +52,11 @@ module RSSH
     end
 
     def hosts
-      @hosts ||= entries.collect(&:host).compact.uniq
+      entries.collect(&:host).compact.uniq
     end
 
     def tags
-      @tags ||= entries.collect(&:tag).compact.uniq
+      entries.collect(&:tag).compact.uniq
     end
  
     def find arg

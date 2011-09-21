@@ -11,11 +11,11 @@ options = {}
 parser  = OptionParser.new do |opts|
 
   opts.on('-t', '--tag [TAG]', String, 'Specify the tag name to association to host') do |tag|
-    self[:tag] = tag
+    options[:tag] = tag
   end
 
   opts.on('-u', '--user [USER]', String, 'Specify a user to connect to host as') do |user|
-    self[:user] = user
+    options[:user] = user
   end
 
   opts.on_tail('-h', '--help', 'Display help' ) do

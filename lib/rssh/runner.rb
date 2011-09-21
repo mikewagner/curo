@@ -37,11 +37,14 @@ module RSSH
       end
     end
 
-    def add 
-      entry = RSSH::Entry.new options
+    def add entry
 
-      raise "Tag already exists for '#{entry.tag}'"    if @config.has_tag?  entry.tag
-      raise "Entry already exists for '#{entry.host}'" if @config.has_host? entry.host
+      if @config.has_tag?(entry.tag)
+        raise DuplicateTag, "Tag already exists for '#{entry.tag}'"
+      end
+      if @config.has_host?(entry.host)
+        raise DuplicateHost, "Host already exists for '#{entry.host}'"
+      end
 
       @config << entry
       @config.save

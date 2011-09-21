@@ -4,5 +4,6 @@ module RSSH
   autoload :Connection,    'rssh/connection'
   autoload :Entry,         'rssh/entry'
   autoload :Runner,        'rssh/runner'
+  autoload :Version,       'rssh/version'
 
 end

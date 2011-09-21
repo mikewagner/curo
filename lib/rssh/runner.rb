@@ -1,29 +1,35 @@
 module RSSH
+
+  class InvalidAction < StandardError; end
+  class DuplicateTag < StandardError; end
+  class DuplicateHost < StandardError; end
+
   class Runner
 
-    attr_accessor :options
+    attr_accessor :action, :config
 
-    def initialize args
-      @args    = args
-      @options = RSSH::Options.new @args
+    def initialize config = nil
+      @config = config || RSSH::Configuration.load
     end
 
-    def run
+    def run options
       begin
-        raise "No action was specified" if options[:action].nil?
+        action   = options.delete(:action)
+        options  = options
 
-        @config = RSSH::Configuration.load
-        action  = options.delete(:action)
+        raise "No action was specified" if action.nil?
 
-        entry = @config.find action
+        entry = config.find action
+        
         if entry
           RSSH::Connection.new( entry, options ).connect
         else
-          if respond_to?(:"#{action}") 
-            send(:"#{action}") 
-          else
-            raise('Error', "unknown attribute: #{k}")
-          end
+          case action
+            when 'add'    then self.add RSSH::Entry.new options
+            when 'list'   then self.list
+            when 'remove' then self.remove options[:entry]
+            else raise InvalidAction
+          end    
         end
       rescue Exception => e
         puts e.message

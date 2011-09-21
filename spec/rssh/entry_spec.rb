@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe RSSH::Action::Entry do
+describe RSSH::Entry do
 
-  let(:entry) { RSSH::Action::Entry.new }
+  let(:entry) { RSSH::Entry.new }
 
   describe "initializiation" do
 
     it "should accept attribute hash" do
       attrs = { :host => '127.0.0.1' }
-      entry = RSSH::Action::Entry.new attrs
+      entry = RSSH::Entry.new attrs
       entry.host.should == '127.0.0.1'
     end
     
 
     it "should accept block" do
-      entry = RSSH::Action::Entry.new do |e|
+      entry = RSSH::Entry.new do |e|
         e.host = '127.0.0.1'
       end
       entry.host.should == '127.0.0.1'
@@ -26,7 +26,7 @@ describe RSSH::Action::Entry do
     
     it "returns attributes hash" do
       args = { :host => 'somedomain.com', :tag => 'foo', :user => 'root' }
-      RSSH::Action::Entry.new(args).attributes.should == args
+      RSSH::Entry.new(args).attributes.should == args
     end
 
   end

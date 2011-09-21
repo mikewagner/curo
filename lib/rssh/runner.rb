@@ -55,8 +55,7 @@ module RSSH
     end
 
 
-    def remove 
-      entry_name_or_tag = options[:entry]
+    def remove entry_name_or_tag
       @config.remove entry_name_or_tag 
       puts "Removed entry for '#{entry_name_or_tag}'"
     end

@@ -71,6 +71,10 @@ module RSSH
       end
     end
 
+    def reset!
+      @entries = []
+    end
+
     def save
       File.open( @path, 'w' ) do |file|
         file.write YAML.dump entries.collect { |e| e.attributes }

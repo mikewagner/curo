@@ -74,14 +74,44 @@ describe RSSH::Runner do
 
     end
 
-
   end
 
   describe "#remove" do
+ 
+    before do
+      config << RSSH::Entry.new( :entry => '1.1.1.1', :tag => 'deleteme' )
+      @runner = RSSH::Runner.new config
+    end
+
+    it "should remove entry by tag" do
+      lambda {
+        @runner.remove 'deleteme'
+      }.should change( config.entries, :size ).from(1).to(0)
+    end
+  
+    it "should remove entry by host" do
+      lambda {
+        @runner.remove '1.1.1.1'
+      }.should change( config.entries, :size ).from(1).to(0)
+    end
+       
+    it "should output confirmation message" do
+      @runner.remove '1.1.1.1'
+      $stdout.string.should match "Removed entry for '1.1.1.1'"
+    end
 
   end
 
   describe "#list" do
+
+    it "should output list of entries" do
+      runner = RSSH::Runner.new config
+      runner.config << RSSH::Entry.new( :entry => 'localhost', :tag => '1' )
+      runner.config << RSSH::Entry.new( :entry => '127.0.0.1', :tag => '2' )
+      runner.list
+      $stdout.string.should == "localhost (1)\n127.0.0.1 (2)\n"
+    end
+
 
   end
 

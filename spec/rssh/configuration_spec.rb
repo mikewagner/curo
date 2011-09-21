@@ -30,7 +30,7 @@ describe RSSH::Configuration do
 
     it "returns array of entries" do
       config = RSSH::Configuration.new
-      entry  = RSSH::Action::Entry.new :host => 'localhost'
+      entry  = RSSH::Entry.new :host => 'localhost'
       config << entry
       config.entries.should == [entry]
     end 
@@ -46,9 +46,9 @@ describe RSSH::Configuration do
     end 
 
     it "returns array of tags for entries" do
-      config << RSSH::Action::Entry.new( :host => 'localhost', :tag => 'foo' )
-      config << RSSH::Action::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
-      config << RSSH::Action::Entry.new( :host => '0.0.0.0' )
+      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << RSSH::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
+      config << RSSH::Entry.new( :host => '0.0.0.0' )
       config.tags.should == ['foo', 'bar']
     end
 
@@ -63,9 +63,9 @@ describe RSSH::Configuration do
     end 
 
     it "returns array of hosts for entries" do
-      config << RSSH::Action::Entry.new( :host => 'localhost', :tag => 'foo' )
-      config << RSSH::Action::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
-      config << RSSH::Action::Entry.new( :host => '0.0.0.0' )
+      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << RSSH::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
+      config << RSSH::Entry.new( :host => '0.0.0.0' )
       config.hosts.should == ['localhost', '127.0.0.1', '0.0.0.0']
     end
 
@@ -76,12 +76,12 @@ describe RSSH::Configuration do
     let(:config) { RSSH::Configuration.new }
     
     it "returns true if tag is found" do
-      config << RSSH::Action::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_tag?('foo').should be_true
     end
     
     it "returns false if tag is NOT found" do
-      config << RSSH::Action::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_tag?('bar').should be_false
     end
 
@@ -92,12 +92,12 @@ describe RSSH::Configuration do
     let(:config) { RSSH::Configuration.new }
     
     it "returns true if host is found" do
-      config << RSSH::Action::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_host?('localhost').should be_true
     end
     
     it "returns false if host is NOT found" do
-      config << RSSH::Action::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_host?('127.0.0.1').should be_false
     end
 

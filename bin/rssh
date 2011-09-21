@@ -23,6 +23,12 @@ parser  = OptionParser.new do |opts|
     exit 0
   end
 
+  opts.on_tail('-v', '--version', 'Display version' ) do
+    require 'rssh/version'
+    puts RSSH::VERSION
+    exit 0
+  end
+
 end
 
 parser.parse!

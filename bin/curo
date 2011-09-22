@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
-$:.unshift File.join( File.dirname(__FILE__), '..', 'lib' )
-
 require 'rubygems'
 require 'optparse'
+
+$:.unshift(File.join(File.dirname(__FILE__), "/../lib"))
 require 'curo'
 
 args = ARGV.clone
@@ -24,7 +24,7 @@ parser  = OptionParser.new do |opts|
   end
 
   opts.on_tail('-v', '--version', 'Display version' ) do
-    require 'rssh/version'
+    require 'curo/version'
     puts Curo::VERSION
     exit 0
   end

@@ -6,7 +6,7 @@ module Curo
 
     attr_accessor :path
 
-    @@default_config = File.expand_path('~/.rssh_config')
+    @@default_config = File.expand_path('~/.curo_config')
 
     class << self
 

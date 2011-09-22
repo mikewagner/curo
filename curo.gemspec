@@ -5,7 +5,6 @@ require "curo/version"
 Gem::Specification.new do |s|
   s.name          = "curo"
   s.version       = Curo::VERSION
-  s.platform      = Gem::Platform::RUBY
   s.authors       = ["Mike Wagner"]
   s.description   = %q{Command line utility for tracking and tagging hosts.}
   s.summary       = %q{Command line utility for tracking and tagging hosts.}
@@ -13,9 +12,10 @@ Gem::Specification.new do |s|
   s.homepage      = %q{http://github.com/mikewagner/curo}
   s.licenses      = [%q{MIT}]
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
-  s.require_paths = [%q{lib}]
+  s.files              = `git ls-files`.split("\n")
+  s.test_files         = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables        = ["curo"]
+  s.default_executable = %q{curo}
+  s.require_paths      = ["lib"]
 end
 

@@ -1,21 +1,21 @@
 require 'spec_helper'
 require 'fileutils'
 
-describe RSSH::Configuration do
+describe Curo::Configuration do
 
   describe "initializiation" do
  
     context "with path parameter" do   
       it "sets path" do
-        config = RSSH::Configuration.new '/path/to/.rssh_config'
-        config.path.should == '/path/to/.rssh_config'
+        config = Curo::Configuration.new '/path/to/.curo_config'
+        config.path.should == '/path/to/.curo_config'
       end
     end
     
     context "with no path parameter" do
       it "sets default path" do
-        config = RSSH::Configuration.new 
-        config.path.should == RSSH::Configuration.default_config
+        config = Curo::Configuration.new 
+        config.path.should == Curo::Configuration.default_config
       end
     end
 
@@ -24,13 +24,13 @@ describe RSSH::Configuration do
   describe "#entries" do
 
     it "returns empty array by default" do
-      config = RSSH::Configuration.new
+      config = Curo::Configuration.new
       config.entries.should == []
     end
 
     it "returns array of entries" do
-      config = RSSH::Configuration.new
-      entry  = RSSH::Entry.new :host => 'localhost'
+      config = Curo::Configuration.new
+      entry  = Curo::Entry.new :host => 'localhost'
       config << entry
       config.entries.should == [entry]
     end 
@@ -39,16 +39,16 @@ describe RSSH::Configuration do
 
   describe "#tags" do
 
-    let(:config) { RSSH::Configuration.new }
+    let(:config) { Curo::Configuration.new }
 
     it "returns empty array when no entries" do
       config.tags.should == []
     end 
 
     it "returns array of tags for entries" do
-      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
-      config << RSSH::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
-      config << RSSH::Entry.new( :host => '0.0.0.0' )
+      config << Curo::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << Curo::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
+      config << Curo::Entry.new( :host => '0.0.0.0' )
       config.tags.should == ['foo', 'bar']
     end
 
@@ -56,16 +56,16 @@ describe RSSH::Configuration do
 
   describe "#hosts" do
 
-    let(:config) { RSSH::Configuration.new }
+    let(:config) { Curo::Configuration.new }
 
     it "returns empty array when no entries" do
       config.hosts.should == []
     end 
 
     it "returns array of hosts for entries" do
-      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
-      config << RSSH::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
-      config << RSSH::Entry.new( :host => '0.0.0.0' )
+      config << Curo::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << Curo::Entry.new( :host => '127.0.0.1', :tag => 'bar' )
+      config << Curo::Entry.new( :host => '0.0.0.0' )
       config.hosts.should == ['localhost', '127.0.0.1', '0.0.0.0']
     end
 
@@ -73,15 +73,15 @@ describe RSSH::Configuration do
 
   describe "#has_tag?" do
 
-    let(:config) { RSSH::Configuration.new }
+    let(:config) { Curo::Configuration.new }
     
     it "returns true if tag is found" do
-      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << Curo::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_tag?('foo').should be_true
     end
     
     it "returns false if tag is NOT found" do
-      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << Curo::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_tag?('bar').should be_false
     end
 
@@ -89,15 +89,15 @@ describe RSSH::Configuration do
 
   describe "#has_host?" do
 
-    let(:config) { RSSH::Configuration.new }
+    let(:config) { Curo::Configuration.new }
     
     it "returns true if host is found" do
-      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << Curo::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_host?('localhost').should be_true
     end
     
     it "returns false if host is NOT found" do
-      config << RSSH::Entry.new( :host => 'localhost', :tag => 'foo' )
+      config << Curo::Entry.new( :host => 'localhost', :tag => 'foo' )
       config.has_host?('127.0.0.1').should be_false
     end
 
@@ -105,10 +105,10 @@ describe RSSH::Configuration do
 
   describe "#load!" do
 
-    let(:config) { RSSH::Configuration.new }  
+    let(:config) { Curo::Configuration.new }  
       
     it "reads and creates entries" do
-      config.path = File.join( File.dirname(__FILE__), '..', 'rssh_test_config' )
+      config.path = File.join( File.dirname(__FILE__), '..', 'curo_test_config' )
       config.load!   
       config.should have(2).entries
     end

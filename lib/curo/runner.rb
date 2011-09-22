@@ -1,4 +1,4 @@
-module RSSH
+module Curo
 
   class InvalidAction < StandardError; end
   class DuplicateTag < StandardError; end
@@ -9,7 +9,7 @@ module RSSH
     attr_accessor :action, :config
 
     def initialize config = nil
-      @config = config || RSSH::Configuration.load
+      @config = config || Curo::Configuration.load
     end
 
     def run options
@@ -22,10 +22,10 @@ module RSSH
         entry = config.find action
         
         if entry
-          RSSH::Connection.new( entry, options ).connect
+          Curo::Connection.new( entry, options ).connect
         else
           case action
-            when 'add'    then self.add RSSH::Entry.new(options)
+            when 'add'    then self.add curo::Entry.new(options)
             when 'list'   then self.list
             when 'remove' then self.remove options[:entry]
             else raise InvalidAction

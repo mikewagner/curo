@@ -1,7 +1,7 @@
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 require 'rspec'
-require 'rssh'
+require 'curo'
 
 # Requires supporting files with custom matchers and macros, etc,
 # in ./support/ and its subdirectories.
@@ -11,5 +11,5 @@ RSpec.configure do |config|
   
 end
 
-$rssh_config_file = File.expand_path( File.join(File.dirname(__FILE__), "rssh_config") )
+$curo_config_file = File.expand_path( File.join(File.dirname(__FILE__), "curo_config") )
 

@@ -1,4 +1,4 @@
-module RSSH
+module Curo
   class Connection
 
     def initialize entry, options = {}

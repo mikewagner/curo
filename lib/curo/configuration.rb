@@ -1,7 +1,7 @@
 require 'yaml'
 require 'fileutils'
 
-module RSSH
+module Curo
   class Configuration
 
     attr_accessor :path
@@ -67,7 +67,7 @@ module RSSH
       FileUtils.touch @path unless File.exist? @path
       contents = YAML.load( File.read( @path ) ) || []
       contents.each do |entry|
-        entries << RSSH::Entry.new( entry )
+        entries << Curo::Entry.new( entry )
       end
     end
 

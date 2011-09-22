@@ -3,7 +3,7 @@ $:.unshift File.join( File.dirname(__FILE__), '..', 'lib' )
 
 require 'rubygems'
 require 'optparse'
-require 'rssh'
+require 'curo'
 
 args = ARGV.clone
 
@@ -25,7 +25,7 @@ parser  = OptionParser.new do |opts|
 
   opts.on_tail('-v', '--version', 'Display version' ) do
     require 'rssh/version'
-    puts RSSH::VERSION
+    puts Curo::VERSION
     exit 0
   end
 
@@ -37,5 +37,5 @@ action_options   = parser.permute(args)
 options[:action] = action_options.shift
 options[:entry]  = action_options.shift
 
-RSSH::Runner.new(RSSH::Configuration.load).run(options)
+Curo::Runner.new(Curo::Configuration.load).run(options)
 

@@ -1,20 +1,20 @@
 require 'spec_helper'
 
-describe RSSH::Entry do
+describe Curo::Entry do
 
-  let(:entry) { RSSH::Entry.new }
+  let(:entry) { Curo::Entry.new }
 
   describe "initializiation" do
 
     it "should accept attribute hash" do
       attrs = { :host => '127.0.0.1' }
-      entry = RSSH::Entry.new attrs
+      entry = Curo::Entry.new attrs
       entry.host.should == '127.0.0.1'
     end
     
 
     it "should accept block" do
-      entry = RSSH::Entry.new do |e|
+      entry = Curo::Entry.new do |e|
         e.host = '127.0.0.1'
       end
       entry.host.should == '127.0.0.1'
@@ -26,7 +26,7 @@ describe RSSH::Entry do
     
     it "returns attributes hash" do
       args = { :host => 'somedomain.com', :tag => 'foo', :user => 'root' }
-      RSSH::Entry.new(args).attributes.should == args
+      Curo::Entry.new(args).attributes.should == args
     end
 
   end

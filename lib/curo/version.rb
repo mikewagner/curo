@@ -1,3 +1,3 @@
-module RSSH
+module Curo
   VERSION = "0.0.1"
 end

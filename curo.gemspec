@@ -1,16 +1,16 @@
 # -*- encoding: utf-8 -*-
 $:.push File.expand_path("../lib", __FILE__)
-require "rssh/version"
+require "curo/version"
 
 Gem::Specification.new do |s|
-  s.name          = "rssh"
-  s.version       = RSSH::VERSION
+  s.name          = "curo"
+  s.version       = Curo::VERSION
   s.platform      = Gem::Platform::RUBY
   s.authors       = ["Mike Wagner"]
   s.description   = %q{Command line utility for tracking and tagging hosts.}
   s.summary       = %q{Command line utility for tracking and tagging hosts.}
   s.email         = %q{mwagner@digitalinsites.com}
-  s.homepage      = %q{http://github.com/mikewagner/rssh}
+  s.homepage      = %q{http://github.com/mikewagner/curo}
   s.licenses      = [%q{MIT}]
 
   s.files         = `git ls-files`.split("\n")

@@ -1,4 +1,4 @@
-module RSSH
+module Curo
   class Entry
 
     attr_accessor :host, :tag, :user

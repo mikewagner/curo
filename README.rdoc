@@ -1,4 +1,4 @@
-= rssh
+= curo
 
 Command line utility for tracking and tagging ssh hosts.
 
@@ -7,29 +7,29 @@ Command line utility for tracking and tagging ssh hosts.
 
 * Add host with optional tag
 
-    rssh add 127.0.0.1 --tag Home
+    curo add 127.0.0.1 --tag Home
 
 * List hosts
 
-    rssh list
+    curo list
 
 * Connect to a host by host name
 
-    rssh 127.0.0.1
+    curo 127.0.0.1
 
 * Connnect to a host by tag
 
-    rssh Home
+    curo Home
 
 * Connect to a host and override the user
 
-    rssh Home -u root
+    curo Home -u root
 
 == TODOs
 
 * Add support for arguments to SSH command
 
-== Contributing to rssh
+== Contributing to curo
  
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it

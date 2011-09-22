@@ -1,17 +1,17 @@
 require 'spec_helper'
 require 'stringio'
 
-describe RSSH::Runner do
+describe Curo::Runner do
 
   before { @org_stdout, $stdout = $stdout, StringIO.new }  
   after  { $stdout = @org_stdout }
 
-  before { `touch #{$rssh_config_file.inspect}` }
-  after  { `rm -f #{$rssh_config_file.inspect}` }
+  before { `touch #{$curo_config_file.inspect}` }
+  after  { `rm -f #{$curo_config_file.inspect}` }
 
   let(:options) { { :action => 'add', :entry => 'localhost', :tag => 'test' } }
-  let(:config)  { RSSH::Configuration.load $rssh_config_file }
-  let(:runner)  { RSSH::Runner.new config }
+  let(:config)  { Curo::Configuration.load $curo_config_file }
+  let(:runner)  { Curo::Runner.new config }
 
   describe "#run" do
     
@@ -29,7 +29,7 @@ describe RSSH::Runner do
     context "when entry does not already exist" do
       
       before do
-        @entry = RSSH::Entry.new :entry => 'localhost', :tag => 'test'
+        @entry = Curo::Entry.new :entry => 'localhost', :tag => 'test'
         runner.add @entry
       end
 
@@ -47,13 +47,13 @@ describe RSSH::Runner do
     context "when entry already exists for tag" do
   
       before do
-        @runner = RSSH::Runner.new config
-        @runner.add RSSH::Entry.new :entry => '127.0.0.1', :tag => 'test'
+        @runner = Curo::Runner.new config
+        @runner.add Curo::Entry.new :entry => '127.0.0.1', :tag => 'test'
       end
  
       it "should raise error" do
         lambda {
-          @runner.add RSSH::Entry.new :entry => '127.0.0.1', :tag => 'test'
+          @runner.add Curo::Entry.new :entry => '127.0.0.1', :tag => 'test'
         }.should raise_error
       end
 
@@ -62,14 +62,14 @@ describe RSSH::Runner do
     context "when entry already exists for host" do
 
       before do
-        @runner = RSSH::Runner.new config
-        @runner.add RSSH::Entry.new :entry => '10.10.10.10', :tag => 'foo'
+        @runner = Curo::Runner.new config
+        @runner.add Curo::Entry.new :entry => '10.10.10.10', :tag => 'foo'
       end
  
       it "should raise error" do
         lambda {
-          @runner.add RSSH::Entry.new :entry => '10.10.10.10', :tag => 'bar'
-        }.should raise_error(RSSH::DuplicateHost, "Host already exists for '10.10.10.10'")
+          @runner.add Curo::Entry.new :entry => '10.10.10.10', :tag => 'bar'
+        }.should raise_error(Curo::DuplicateHost, "Host already exists for '10.10.10.10'")
       end
 
     end
@@ -79,8 +79,8 @@ describe RSSH::Runner do
   describe "#remove" do
  
     before do
-      config << RSSH::Entry.new( :entry => '1.1.1.1', :tag => 'deleteme' )
-      @runner = RSSH::Runner.new config
+      config << Curo::Entry.new( :entry => '1.1.1.1', :tag => 'deleteme' )
+      @runner = Curo::Runner.new config
     end
 
     it "should remove entry by tag" do
@@ -105,9 +105,9 @@ describe RSSH::Runner do
   describe "#list" do
 
     it "should output list of entries" do
-      runner = RSSH::Runner.new config
-      runner.config << RSSH::Entry.new( :entry => 'localhost', :tag => '1' )
-      runner.config << RSSH::Entry.new( :entry => '127.0.0.1', :tag => '2' )
+      runner = Curo::Runner.new config
+      runner.config << Curo::Entry.new( :entry => 'localhost', :tag => '1' )
+      runner.config << Curo::Entry.new( :entry => '127.0.0.1', :tag => '2' )
       runner.list
       $stdout.string.should == "localhost (1)\n127.0.0.1 (2)\n"
     end

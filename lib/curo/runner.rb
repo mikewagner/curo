@@ -25,7 +25,7 @@ module Curo
           Curo::Connection.new( entry, options ).connect
         else
           case action
-            when 'add'    then self.add curo::Entry.new(options)
+            when 'add'    then self.add Curo::Entry.new(options)
             when 'list'   then self.list
             when 'remove' then self.remove options[:entry]
             else raise InvalidAction
